@@ -4,24 +4,30 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.BindException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Calendar;
-import java.util.Scanner;
 
+import model.Config;
 import model.DataIOA;
 import model.JuegoAdivinar;
 import model.Serializador;
 import model.logRegister;
+import model.readJson;
 
 public class InterfazAppServer {
 	public static void main(String[] args) {
-
+		
+		
+		readJson rj = new readJson();
+		Config x = rj.cargarJSON();
 		
 		logRegister in = new logRegister();
 		// System.exit(0);
+		int port = x.getPuerto();
+		String ip = x.getIp();
 		try {
-			ServerSocket server = new ServerSocket(60000);
+			ServerSocket server = new ServerSocket(port,5,InetAddress.getByName(ip));
 			System.out.println(in.getTiempo() + "Servidor creado en el puerto "
 					+ server.getInetAddress().getHostAddress() + ":" + server.getLocalPort());
 
@@ -67,26 +73,20 @@ public class InterfazAppServer {
 
 				} catch (IOException e) {
 					System.err.println("Error en la input o output con el cliente" + e);
-				}
+				} 
 
 			}
 
 		} catch (BindException e) {
 			// TODO Auto-generated catch block
-			System.err.println("La IP ya se encuentre en uso" + e);
+			System.err.println("La IP ya se encuentre en uso " + e);
 		} catch (IOException e) {
 			System.err.println("Error en la input o output" + e);
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			System.err.println("Algun argumento es nulo");
 		}
 
-	}
-
-	public String getTiempo() {
-		Calendar tiempo = Calendar.getInstance();
-		int h = tiempo.get(Calendar.HOUR_OF_DAY);
-		int m = tiempo.get(Calendar.MINUTE);
-		int s = tiempo.get(Calendar.SECOND);
-
-		return "[" + String.valueOf(h) + ":" + String.valueOf(m) + ":" + String.valueOf(s) + "]";
 	}
 
 }

@@ -80,5 +80,10 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
+      <Button fx:id="btnReplay" disable="true" layoutX="415.0" layoutY="435.0" mnemonicParsing="false" onAction="#btnReplayOnAction" prefHeight="53.0" prefWidth="140.0" text="Jugar otra vez" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

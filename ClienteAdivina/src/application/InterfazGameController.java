@@ -1,6 +1,5 @@
 package application;
 
-import java.awt.Event;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -28,7 +27,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Config;
@@ -53,6 +51,9 @@ public class InterfazGameController implements Initializable {
 
 	@FXML
 	private Button btnProbar;
+
+	@FXML
+	private Button btnReplay;
 
 	@FXML
 	private Text labelConexion;
@@ -167,12 +168,14 @@ public class InterfazGameController implements Initializable {
 					alerta.setContentText(this.getMensaje((intentos - 1), inputData.getN_aleatorio()));
 					alerta.show();
 					btnProbar.setDisable(true);
+					btnReplay.setDisable(false);
 				} else if (msg.equalsIgnoreCase("perdio")) {
 					Alert alerta = new Alert(AlertType.INFORMATION);
 					alerta.setHeaderText("Usted " + msg);
 					alerta.setContentText(this.getMensaje((intentos - 1), inputData.getN_aleatorio()));
 					alerta.show();
 					btnProbar.setDisable(true);
+					btnReplay.setDisable(false);
 
 				} else {
 					imgViewArriba.setEffect(null);
@@ -193,6 +196,25 @@ public class InterfazGameController implements Initializable {
 		} else {
 
 		}
+
+	}
+
+	@FXML
+	void btnReplayOnAction(ActionEvent event) {
+		this.cerrarConexion();
+		try {
+			Parent pane = FXMLLoader.load(getClass().getResource("xd.fxml"));
+			Scene sceneGame = new Scene(pane, 600,600);
+			Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+			stage.setScene(sceneGame);
+			stage.show();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
 
 	}
 

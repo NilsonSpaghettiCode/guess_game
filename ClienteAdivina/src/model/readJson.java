@@ -18,7 +18,7 @@ public class readJson
 	private String jsonContent;
 	public readJson() 
 	{
-		jsonPATH = "src/model/config.json/";
+		jsonPATH = ".\\filesconfig\\config.json";
 		jsonContent = "";
 		
 	}
