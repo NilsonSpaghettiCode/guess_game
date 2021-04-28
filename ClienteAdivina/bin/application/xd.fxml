@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InterfazGameController">
    <children>
-      <Text fx:id="labelAdivinar" layoutX="219.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Adivinando">
+      <Text fx:id="labelAdivinar" layoutX="154.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="¡Adivina el número!" wrappingWidth="333.41064453125">
          <font>
             <Font name="SansSerif" size="35.0" />
          </font>
