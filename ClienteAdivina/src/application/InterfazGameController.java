@@ -123,11 +123,11 @@ public class InterfazGameController implements Initializable {
 
 		} catch (SocketTimeoutException e) {
 			Alert alertaTI = new Alert(AlertType.ERROR);
-			alertaTI.setContentText("Error al intentar conectar, el tiempo de espera se agoto, ERROR 504");
+			alertaTI.setContentText("Error al intentar conectar, el tiempo de espera se agoto, ERROR 504 el servidor no esta en linea");
 			alertaTI.show();
 		} catch (ConnectException e) {
 			Alert alertaCE = new Alert(AlertType.ERROR);
-			alertaCE.setContentText("Error al intentar conectar, el tiempo de espera se agoto, ERROR 504");
+			alertaCE.setContentText("Error al intentar conectar, el tiempo de espera se agoto, ERROR 504 el servidor no esta en linea");
 			alertaCE.show();
 		} catch (UnknownHostException e) {
 			Alert alertaIO = new Alert(AlertType.ERROR);
