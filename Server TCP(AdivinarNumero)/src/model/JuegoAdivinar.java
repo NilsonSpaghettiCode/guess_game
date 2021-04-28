@@ -54,6 +54,7 @@ public class JuegoAdivinar
 		if (this.getNumero_aleatorio() == numero_prueba) 
 		{
 			this.setEstaAdivinado(true);
+			this.disminuirIntentos();
 			return "Gano";
 		}else{
 			this.disminuirIntentos();

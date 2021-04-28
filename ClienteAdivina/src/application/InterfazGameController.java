@@ -84,6 +84,9 @@ public class InterfazGameController implements Initializable {
 
 	@FXML
 	private Text labelTiempoX;
+	
+	@FXML
+    private Text labelEstadoConectionT;
 
 	private Socket cliente;
 	private DataInputStream dis;
@@ -97,7 +100,7 @@ public class InterfazGameController implements Initializable {
 		readJson rj = new readJson();
 		this.config = rj.cargarJSON();
 
-		this.connectar(config.getIp(), config.getPuerto());
+		this.connectar(config.getIp(), config.getPuerto(), config.getNickname());
 		tiempo = 0;
 
 	}
@@ -108,21 +111,23 @@ public class InterfazGameController implements Initializable {
 		}
 	}
 
-	public void connectar(String ip, int puerto) {
+	public void connectar(String ip, int puerto, String name) {
 		cliente = new Socket();
 		try {
 			cliente.connect(new InetSocketAddress(ip, puerto), 2000);
 
 			dis = new DataInputStream(cliente.getInputStream());
 			dos = new DataOutputStream(cliente.getOutputStream());
+			dos.write(name.getBytes());
+			System.out.println("Nombre de usuario enviado");
 
 		} catch (SocketTimeoutException e) {
 			Alert alertaTI = new Alert(AlertType.ERROR);
-			alertaTI.setContentText("Error al intentar conectar, el tiempo de espera se agoto");
+			alertaTI.setContentText("Error al intentar conectar, el tiempo de espera se agoto, ERROR 504");
 			alertaTI.show();
 		} catch (ConnectException e) {
 			Alert alertaCE = new Alert(AlertType.ERROR);
-			alertaCE.setContentText("Error al intentar conectar, el tiempo de espera se agoto");
+			alertaCE.setContentText("Error al intentar conectar, el tiempo de espera se agoto, ERROR 504");
 			alertaCE.show();
 		} catch (UnknownHostException e) {
 			Alert alertaIO = new Alert(AlertType.ERROR);
@@ -144,58 +149,69 @@ public class InterfazGameController implements Initializable {
 
 	@FXML
 	void probarOnAction(ActionEvent event) {
-		if (cliente.isConnected() && !(cliente.isClosed())) {
-			String number = cartaChoiseBox.getValue();
-			System.out.println("Respuesta a enviar:" + number);
-			try {
-				byte[] data = new byte[1024];
-				dos.write(number.getBytes());
-				dis.read(data);
-				System.out.println("Respuesta Recibida");
-				Serializador s = new Serializador();
-				DataIOA inputData = s.desSerializar(data);
+		if (cliente.isConnected()) {
+			if (!(cliente.isClosed())) {
+				String number = cartaChoiseBox.getValue();
+				System.out.println("Respuesta a enviar:" + number);
+				try {
+					byte[] data = new byte[1024];
+					dos.write(number.getBytes());
+					dis.read(data);
+					System.out.println("Respuesta Recibida");
+					Serializador s = new Serializador();
+					DataIOA inputData = s.desSerializar(data);
 
-				String msg = inputData.getMensaje();
-				int intentos = inputData.getIntentos();
-				tiempo += inputData.getTiempo();
+					String msg = inputData.getMensaje();
+					int intentos = inputData.getIntentos();
+					tiempo += inputData.getTiempo();
 
-				this.cambiarEtiquetas((intentos - 1), (tiempo / 1000));
+					this.cambiarEtiquetas((intentos - 1), (tiempo / 1000));
 
-				if (msg.equalsIgnoreCase("gano")) {
+					if (msg.equalsIgnoreCase("gano")) {
 
-					Alert alerta = new Alert(AlertType.INFORMATION);
-					alerta.setHeaderText("Usted " + msg);
-					alerta.setContentText(this.getMensaje((intentos - 1), inputData.getN_aleatorio()));
-					alerta.show();
-					btnProbar.setDisable(true);
-					btnReplay.setDisable(false);
-				} else if (msg.equalsIgnoreCase("perdio")) {
-					Alert alerta = new Alert(AlertType.INFORMATION);
-					alerta.setHeaderText("Usted " + msg);
-					alerta.setContentText(this.getMensaje((intentos - 1), inputData.getN_aleatorio()));
-					alerta.show();
-					btnProbar.setDisable(true);
-					btnReplay.setDisable(false);
+						Alert alerta = new Alert(AlertType.INFORMATION);
+						alerta.setHeaderText("Usted " + msg);
+						alerta.setContentText(this.getMensaje((intentos - 1), inputData.getN_aleatorio()));
+						alerta.show();
+						btnProbar.setDisable(true);
+						btnReplay.setDisable(false);
+					} else if (msg.equalsIgnoreCase("perdio")) {
+						Alert alerta = new Alert(AlertType.INFORMATION);
+						alerta.setHeaderText("Usted " + msg);
+						alerta.setContentText(this.getMensaje((intentos - 1), inputData.getN_aleatorio()));
+						alerta.show();
+						btnProbar.setDisable(true);
+						btnReplay.setDisable(false);
 
-				} else {
-					imgViewArriba.setEffect(null);
-					imgViewAbajo.setEffect(null);
-					if (msg.equalsIgnoreCase("arriba")) {
-						imgViewArriba.setEffect(effectoGlow);
+					} else {
+						imgViewArriba.setEffect(null);
+						imgViewAbajo.setEffect(null);
+						if (msg.equalsIgnoreCase("arriba")) {
+							imgViewArriba.setEffect(effectoGlow);
 
-					} else if (msg.equalsIgnoreCase("debajo")) {
-						imgViewAbajo.setEffect(effectoGlow);
+						} else if (msg.equalsIgnoreCase("debajo")) {
+							imgViewAbajo.setEffect(effectoGlow);
+						}
+
 					}
 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.err.println("Error con los valores " + e);
+					this.cerrarIO();
+					this.setLabelConexion();
+					Alert alertaIO = new Alert(AlertType.ERROR);
+					alertaIO.setContentText("Error al intentar conectar, el input o el output son nulos o son invalido, revise que el servidor este ON");
+					alertaIO.show();
+					this.btnProbar.setDisable(true);
 				}
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.err.println("Error con los valores" + e);
+			} else {
+				this.setLabelConexion();
 			}
-		} else {
-
+			
 		}
+		
+		
 
 	}
 
@@ -206,6 +222,7 @@ public class InterfazGameController implements Initializable {
 			Parent pane = FXMLLoader.load(getClass().getResource("xd.fxml"));
 			Scene sceneGame = new Scene(pane, 600,600);
 			Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+			sceneGame.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(sceneGame);
 			stage.show();
 
@@ -240,6 +257,17 @@ public class InterfazGameController implements Initializable {
 		this.labelIntentoX.setText(String.valueOf(intentos));
 		this.labelTiempoX.setText(String.valueOf(tiempo) + " s");
 	}
+	
+	public void cerrarIO() 
+	{
+		try {
+			this.dis.close();
+			this.dos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.err.println("IOs nunca fueron creados "+ e);
+		}
+	}
 
 	@FXML
 	void volverOnAction(ActionEvent event) {
@@ -263,6 +291,7 @@ public class InterfazGameController implements Initializable {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.err.println("Error al cargar la interfaz "+e);
 			}
 		}
 	}
@@ -284,17 +313,23 @@ public class InterfazGameController implements Initializable {
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Error en la IO, no esta creada, o perdio su asociacion "+e);
 		}
 
 	}
 
 	public void setLabelConexion() {
 		if (cliente.isConnected()) {
-			labelConexion.setText(labelConexion.getText() + "Conectado");
-		} else {
-			labelConexion.setText(labelConexion.getText() + "Desconectado");
+			if (!(cliente.isClosed())) {
+				labelEstadoConectionT.setText("Conectado");
+			} else {
+				labelEstadoConectionT.setText("Desconectado");
+			}
+		}else 
+		{
+			labelEstadoConectionT.setText("Desconectado");
 		}
+
 	}
 
 	/**
@@ -307,10 +342,13 @@ public class InterfazGameController implements Initializable {
 		this.setLabelConexion();
 		this.labelIntentoX.setText("0");
 		this.labelTiempoX.setText("0");
+		this.labelEstadoConectionT.setText(" ");
 		this.cartaChoiseBox.setOnAction((event) -> {
 			seleccionarCarta(cartaChoiseBox.getValue());
 		});
-
+		
+		this.cartaChoiseBox.setValue("1");
+		this.setLabelConexion();
 	}
 
 	public Config getConfig() {

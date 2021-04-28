@@ -1,1 +1,40 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+.button
+{
+	-fx-background-color: #003F63;
+	-fx-text-fill: #F2B138;
+	-fx-border-color: #2B3240;
+	-fx-border-radius: 5;
+}
+
+.button:hover
+{
+	-fx-background-color: #D94C1A;
+	-fx-text-fill: #ffffff;
+	-fx-border-color: #D94C1A;
+}
+
+.root
+{
+	-fx-background-color: #353D40;
+}
+
+
+TextField
+{
+	-fx-background-color: #D9D9D9;
+}
+
+.choice-box
+{
+	-fx-background-color: #003F63;
+	-fx-border-color: #2B3240;
+}
+
+.choice-box > .label { -fx-text-fill: #D9D9D9; }
+
+.choice-box .context-menu { -fx-background-color: #003F63; }
+.choice-box .menu-item > .label { -fx-text-fill: #D9D9D9; }
+

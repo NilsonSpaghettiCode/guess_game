@@ -34,6 +34,7 @@ public class SampleController
 			Parent parent = FXMLLoader.load(getClass().getResource("InterfazConfiguracion.fxml"));
 			Scene scene = new Scene(parent,600,400);
 			Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 			
@@ -57,7 +58,7 @@ public class SampleController
 			Parent pane =  FXMLLoader.load(getClass().getResource("xd.fxml"));
 			
 			Scene sceneGame = new Scene(pane, 600,600);
-			
+			sceneGame.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			Stage stage = (Stage) (((Node) event.getSource()).getScene().getWindow());
 			stage.setScene(sceneGame);
 			stage.show();

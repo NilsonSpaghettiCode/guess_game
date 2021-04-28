@@ -40,7 +40,11 @@ public class InterfazAppServer {
 							+ ":" + cliente.getPort());
 					DataInputStream dis = new DataInputStream(cliente.getInputStream());
 					DataOutputStream dos = new DataOutputStream(cliente.getOutputStream());
-					JuegoAdivinar nJuego = new JuegoAdivinar("DarkWizard_GM", in);
+					byte[] msgName = new byte[256];
+					dis.read(msgName);
+					
+					
+					JuegoAdivinar nJuego = new JuegoAdivinar(new String(msgName).trim(), in);
 					do {
 						byte[] data = new byte[256];
 						long i = System.currentTimeMillis();

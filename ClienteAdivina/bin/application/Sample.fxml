@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="paneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<Pane fx:id="paneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #353D40;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <children>
-      <Text fill="WHITE" layoutX="82.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adivina" textAlignment="CENTER" wrappingWidth="181.263671875">
+      <Text fill="#f2b138" layoutX="28.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Juega y Adivina" textAlignment="CENTER" wrappingWidth="289.263671875">
          <font>
             <Font name="Comic Sans MS" size="36.0" />
          </font></Text>
@@ -22,12 +22,12 @@
                   <Font name="Comic Sans MS" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnConfiguracion" mnemonicParsing="false" onAction="#btnConfiguracionOnAction" prefHeight="100.0" prefWidth="250.0" text="Configuración">
+            <Button fx:id="btnConfiguracion" mnemonicParsing="false" onAction="#btnConfiguracionOnAction" prefHeight="100.0" prefWidth="250.0" text="Configuración" textFill="#f2b138">
                <font>
                   <Font name="Comic Sans MS" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#btnExitOnAction" prefHeight="100.0" prefWidth="250.0" text="Salir">
+            <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#btnExitOnAction" prefHeight="100.0" prefWidth="250.0" text="Salir" textFill="#f2b138">
                <font>
                   <Font name="Comic Sans MS" size="22.0" />
                </font>

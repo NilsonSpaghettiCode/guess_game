@@ -8,52 +8,52 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InterfazGameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InterfazGameController">
    <children>
-      <Text fx:id="labelAdivinar" layoutX="219.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adivinando">
+      <Text fx:id="labelAdivinar" layoutX="219.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Adivinando">
          <font>
             <Font name="SansSerif" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="labelArriba" layoutX="427.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número Arriba">
+      <Text fx:id="labelArriba" layoutX="427.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Número Arriba">
          <font>
-            <Font name="SansSerif" size="18.0" />
+            <Font name="SansSerif Bold" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="labelAbajo" layoutX="428.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número Abajo">
+      <Text fx:id="labelAbajo" layoutX="428.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Número Abajo">
          <font>
-            <Font name="SansSerif" size="18.0" />
+            <Font name="SansSerif Bold" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="labelRespuestaServidor" layoutX="231.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Respuestas Servidor">
+      <Text fx:id="labelRespuestaServidor" layoutX="231.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Respuestas Servidor">
          <font>
             <Font name="SansSerif" size="18.0" />
          </font>
       </Text>
       <Button fx:id="btnVolver" layoutX="235.0" layoutY="435.0" mnemonicParsing="false" onAction="#volverOnAction" prefHeight="53.0" prefWidth="161.0" text="Volver">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Button>
       <Button fx:id="btnProbar" layoutX="19.0" layoutY="449.0" mnemonicParsing="false" onAction="#probarOnAction" prefHeight="25.0" prefWidth="200.0" text="Probar">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Text fx:id="labelConexion" layoutX="233.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conexíon:">
+      <Text fx:id="labelConexion" layoutX="233.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Conexíon:">
          <font>
             <Font name="SansSerif" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="labelIntentos" layoutX="231.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intentos:">
+      <Text fx:id="labelIntentos" layoutX="231.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Intentos:">
          <font>
             <Font name="SansSerif" size="18.0" />
          </font>
       </Text>
       <ChoiceBox fx:id="cartaChoiseBox" layoutX="19.0" layoutY="414.0" prefHeight="25.0" prefWidth="200.0" />
-      <Text fx:id="labelSelect" layoutX="19.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione un número">
+      <Text fx:id="labelSelect" layoutX="19.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Seleccione un número">
          <font>
-            <Font name="SansSerif" size="18.0" />
+            <Font name="SansSerif Bold" size="18.0" />
          </font>
       </Text>
       <ImageView fx:id="imgViewCarta" fitHeight="307.0" fitWidth="200.0" layoutX="19.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
@@ -65,25 +65,30 @@
          <image>
             <Image url="@../images/abajo.png" />
          </image></ImageView>
-      <Text fx:id="labelTiempo" layoutX="231.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiempo:">
+      <Text fx:id="labelTiempo" layoutX="231.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2B138;" text="Tiempo:">
          <font>
             <Font name="SansSerif" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="labelIntentoX" fill="#04a809" layoutX="315.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="46.0">
+      <Text fx:id="labelIntentoX" fill="#d9d9d9" layoutX="315.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="46.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <Text fx:id="labelTiempoX" fill="#04a809" layoutX="310.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="56.0">
+      <Text fx:id="labelTiempoX" fill="#d9d9d9" layoutX="310.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="56.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <Button fx:id="btnReplay" disable="true" layoutX="415.0" layoutY="435.0" mnemonicParsing="false" onAction="#btnReplayOnAction" prefHeight="53.0" prefWidth="140.0" text="Jugar otra vez" textAlignment="CENTER">
+      <Button fx:id="btnReplay" disable="true" layoutX="415.0" layoutY="435.0" mnemonicParsing="false" onAction="#btnReplayOnAction" prefHeight="53.0" prefWidth="161.0" text="Jugar otra vez" textAlignment="CENTER">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Button>
+      <Text fx:id="labelEstadoConectionT" fill="#d9d9d9" layoutX="321.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="107.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
